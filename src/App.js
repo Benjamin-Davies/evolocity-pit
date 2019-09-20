@@ -1,24 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import { getTelemetryData } from './telemetry';
 import './App.css';
 
 function App() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    getTelemetryData()
+      .then(setData);
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header className="App-status">
+        <span className="left orange">&tau;-morrow</span>
       </header>
+      <main className="App-main">
+        <h1>Welcome to &tau;-morrow pit</h1>
+        <ul>
+          { data.map(d => (<li key={d.time}>{new Date(d.time).toString()} - {d.battery_voltage}</li>)) }
+        </ul>
+      </main>
     </div>
   );
 }
