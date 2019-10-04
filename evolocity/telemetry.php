@@ -5,7 +5,11 @@ header("Access-Control-Allow-Origin: *");
 
 switch ($_SERVER['REQUEST_METHOD']) {
 case 'GET':
-  $query = $pdo->prepare('SELECT * FROM telemetry');
+  $query = $pdo->prepare('
+    SELECT * FROM telemetry
+    WHERE time > :since
+    ORDER BY time');
+  $query->bindValue('since', date($_GET['since']));
   $query->execute();
   $data = $query->fetchAll(PDO::FETCH_ASSOC);
 
