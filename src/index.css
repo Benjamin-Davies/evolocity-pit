@@ -8,6 +8,7 @@ body {
   color: #eee;
   margin: 0;
   font-family: "Input Sans", sans-serif;
+  font-size: 18pt;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -17,11 +18,11 @@ h1, h2, h3 {
 }
 
 .left {
-  text-align: left;
+  float: left;
 }
 
 .right {
-  text-align: right;
+  float: right;
 }
 
 .orange {

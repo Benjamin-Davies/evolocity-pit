@@ -16,7 +16,14 @@
   margin: 0 8pt;
 }
 
-.App-main {
+.App-header {
   margin: 0 auto;
   max-width: 1024px;
+  text-align: center;
+}
+
+.App-main {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
