@@ -1,16 +1,37 @@
 const express = require('express');
-const proxy = require('express-http-proxy');
+const { createProxyServer } = require('http-proxy');
 
 const api = require('./api');
 
+const production = process.env.NODE_ENV === 'production';
 const app = express();
+/**@type{Server} */
+let devProxy;
 
 app.use('/api', api());
 
-if (process.env.NODE_ENV === 'production') {
+if (production) {
   app.use(express.static('build'));
 } else {
-  app.use(proxy('localhost:3000'));
+  devProxy = createProxyServer({
+    target: {
+      host: 'localhost',
+      port: 3000
+    }
+  });
+
+  app.use((req, res) => {
+    devProxy.web(req, res);
+  });
 }
 
-app.listen(process.env.PORT || 1234);
+const port = process.env.PORT || 1234;
+const server = app.listen(port, () => {
+  console.log(`Listening on port: ${port}`);
+});
+
+if (!production) {
+  server.on('upgrade', (req, socket, head) => {
+    devProxy.ws(req, socket, head);
+  });
+}

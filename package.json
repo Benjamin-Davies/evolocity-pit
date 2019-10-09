@@ -5,10 +5,9 @@
   "dependencies": {
     "concurrently": "^5.0.0",
     "express": "^4.17.1",
-    "express-http-proxy": "^1.6.0",
+    "http-proxy": "^1.18.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "react-google-charts": "^3.0.15",
     "react-scripts": "3.1.1",
     "sqlite3": "^4.1.0"
   },
@@ -17,7 +16,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "dev-server": "nodemon server",
-    "dev": "concurrently -n react,server npm:dev-*",
+    "dev": "concurrently npm:dev-*",
     "start": "NODE_ENV=production node server"
   },
   "eslintConfig": {
