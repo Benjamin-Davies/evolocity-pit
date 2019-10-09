@@ -15,7 +15,7 @@
     "dev-react": "BROWSER=none react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "dev-server": "nodemon server",
+    "dev-server": "nodemon --watch server/**/*.js server",
     "dev": "concurrently npm:dev-*",
     "start": "NODE_ENV=production node server"
   },
