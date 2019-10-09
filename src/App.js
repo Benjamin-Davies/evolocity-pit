@@ -23,8 +23,8 @@ function App() {
         <span className="left orange">&tau;-morrow</span>
         { lastData ? (
           <>
-            <span className="right">{lastData.battery_voltage}V</span>
-            <span className="right">{lastData.current}A</span>
+            <span className="right">{lastData.battery_voltage.toFixed(2)}V</span>
+            <span className="right">{lastData.current.toFixed(2)}A</span>
           </>
         ) : null }
       </div>
