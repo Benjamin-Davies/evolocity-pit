@@ -8,7 +8,6 @@ const db = new Database('sensors.sqlite');
  * @returns {Promise<object[]>}
  */
 function getRange(start, end) {
-  console.log(arguments);
   return new Promise((res, rej) => {
     db.all(
       'SELECT * FROM readings WHERE time > ? AND time < ?',
