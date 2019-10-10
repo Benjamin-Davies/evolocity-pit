@@ -1,5 +1,5 @@
 const baseUrl = process.env.NODE_ENV === 'production'
-  ? 'https://us-central1-tau-morrow.cloudfunctions.net'
+  ? ''
   : 'http://localhost:5000/tau-morrow/us-central1';
 
 /**
