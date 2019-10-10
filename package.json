@@ -12,12 +12,11 @@
     "sqlite3": "^4.1.0"
   },
   "scripts": {
-    "dev-react": "BROWSER=none react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "dev-server": "nodemon --watch server/**/*.js server",
-    "dev": "concurrently npm:dev-*",
-    "start": "NODE_ENV=production node server"
+    "dev": "BROWSER=none concurrently npm:dev-server npm:start"
   },
   "eslintConfig": {
     "extends": "react-app"
