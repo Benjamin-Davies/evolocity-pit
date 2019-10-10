@@ -12,7 +12,7 @@
     "sqlite3": "^4.1.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently 'react-scripts start' 'npm --prefix functions run serve'",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "dev-server": "nodemon --watch server/**/*.js server",

@@ -1,8 +1,15 @@
 import * as functions from 'firebase-functions';
+import * as express from 'express';
+import * as cors from 'cors';
 
-export const sensors = functions.https.onRequest((req, res) => {
-  const params = req.url.split('/');
-  const startTime = new Date(params[1]);
-  const endTime = new Date(params[2]);
+const app = express();
+
+app.use(cors({ origin: true }));
+
+app.get('/sensors/:start/:end', (req, res) => {
+  const startTime = new Date(req.params.start);
+  const endTime = new Date(req.params.end);
   res.send({ startTime, endTime });
 });
+
+export const api = functions.https.onRequest(app);
