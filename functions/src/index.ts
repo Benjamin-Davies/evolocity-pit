@@ -1,8 +1,8 @@
 import * as functions from 'firebase-functions';
 
-// Start writing Firebase Functions
-// https://firebase.google.com/docs/functions/typescript
-
-export const helloWorld = functions.https.onRequest((request, response) => {
- response.send("Hello from Firebase!");
+export const sensors = functions.https.onRequest((req, res) => {
+  const params = req.url.split('/');
+  const startTime = new Date(params[1]);
+  const endTime = new Date(params[2]);
+  res.send({ startTime, endTime });
 });
