@@ -4,7 +4,7 @@
     "lint": "tslint --project tsconfig.json",
     "build": "tsc",
     "build:watch": "tsc --watch",
-    "serve": "concurrently 'npm run build:watch' 'firebase serve --only functions'",
+    "serve": "NODE_ENV=development concurrently 'npm run build:watch' 'firebase serve --only functions'",
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
