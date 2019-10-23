@@ -5,6 +5,7 @@
   "dependencies": {
     "concurrently": "^5.0.0",
     "express": "^4.17.1",
+    "firebase": "^7.2.1",
     "http-proxy": "^1.18.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
@@ -12,7 +13,7 @@
     "sqlite3": "^4.1.0"
   },
   "scripts": {
-    "start": "concurrently 'react-scripts start' 'npm --prefix functions run serve'",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "dev-server": "nodemon --watch server/**/*.js server",
