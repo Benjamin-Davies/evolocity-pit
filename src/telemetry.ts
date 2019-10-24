@@ -1,5 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
+import { Observable } from 'rxjs';
 
 import firebaseConfig from './firebase-config';
 
@@ -22,4 +23,21 @@ export async function getDataRange(start: Date, end: Date): Promise<SensorData[]
     .where('time', '<', end);
   const snapshot = await query.get();
   return snapshot.docs.map(doc => doc.data() as SensorData);
+}
+
+export function getDataStream(start: Date = new Date()): Observable<SensorData> {
+  const query = sensors
+    .where('time', '>', start);
+  return new Observable(sub => {
+    query.onSnapshot({
+      complete() { sub.complete(); },
+      error(err) { sub.error(err); },
+      next(snap) {
+        for (const change of snap.docChanges()) {
+          if (change.type === 'added')
+            sub.next(change.doc.data() as SensorData);
+        }
+      },
+    });
+  });
 }

@@ -14,6 +14,11 @@ function App() {
   useEffect(() => {
     getDataRange(startTime, endTime)
       .then(setData);
+    //const sub = getDataStream()
+    //  .subscribe(newData => {
+    //    setData([...data, newData]);
+    //  });
+    //return () => sub.unsubscribe();
   }, [ startTime, endTime ]);
 
   console.log(lastData);
