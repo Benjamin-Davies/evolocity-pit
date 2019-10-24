@@ -8,7 +8,7 @@ function App() {
   const [startTime, setStartTime] = useState(new Date(2019, 8, 22));
   const [endTime, setEndTime] = useState(new Date());
 
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<any[]>([]);
   const lastData = data[data.length - 1];
 
   useEffect(() => {

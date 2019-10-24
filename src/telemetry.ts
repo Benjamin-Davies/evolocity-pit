@@ -8,11 +8,7 @@ export const db = app.firestore();
 
 export const sensors = db.collection('sensors');
 
-/**
- * @param{Date} start
- * @param{Date} end
- */
-export async function getTelemetryData(start, end) {
+export async function getTelemetryData(start: Date, end: Date) {
   const query = sensors
     .where('time', '>', start)
     .where('time', '<', end);
