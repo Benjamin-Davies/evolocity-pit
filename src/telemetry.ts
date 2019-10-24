@@ -3,15 +3,23 @@ import 'firebase/firestore';
 
 import firebaseConfig from './firebase-config';
 
-export const app = firebase.initializeApp(firebaseConfig);
-export const db = app.firestore();
+const app = firebase.initializeApp(firebaseConfig);
+const db = app.firestore();
 
-export const sensors = db.collection('sensors');
+const sensors = db.collection('sensors');
 
-export async function getTelemetryData(start: Date, end: Date) {
+export interface SensorData {
+  battery_voltage: number;
+  current: number;
+  location?: string;
+  time: firebase.firestore.Timestamp;
+  voltage: number;
+}
+
+export async function getDataRange(start: Date, end: Date): Promise<SensorData[]> {
   const query = sensors
     .where('time', '>', start)
     .where('time', '<', end);
   const snapshot = await query.get();
-  return snapshot.docs.map(doc => doc.data());
+  return snapshot.docs.map(doc => doc.data() as SensorData);
 }

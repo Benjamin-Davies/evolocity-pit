@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { getTelemetryData } from './telemetry';
+import { getDataRange } from './telemetry';
 
 import './App.css';
 
@@ -12,7 +12,7 @@ function App() {
   const lastData = data[data.length - 1];
 
   useEffect(() => {
-    getTelemetryData(startTime, endTime)
+    getDataRange(startTime, endTime)
       .then(setData);
   }, [ startTime, endTime ]);
 
