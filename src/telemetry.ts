@@ -12,7 +12,7 @@ const sensors = db.collection('sensors');
 export interface SensorData {
   battery_voltage: number;
   current: number;
-  location?: string;
+  location: firebase.firestore.GeoPoint | null;
   time: firebase.firestore.Timestamp;
   voltage: number;
 }
