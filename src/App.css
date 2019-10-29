@@ -27,3 +27,8 @@
   flex-direction: row;
   justify-content: center;
 }
+
+.App .leaflet-container {
+  height: 40vw;
+  width: 40vw;
+}
