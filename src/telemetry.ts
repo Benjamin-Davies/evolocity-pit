@@ -12,9 +12,17 @@ const sensors = db.collection('sensors');
 export interface SensorData {
   battery_voltage: number;
   current: number;
+  date: Date;
   location: firebase.firestore.GeoPoint | null;
   time: firebase.firestore.Timestamp;
   voltage: number;
+}
+
+/**WARNING! mutates argument */
+function prepareSensorData(doc: firebase.firestore.QueryDocumentSnapshot): SensorData {
+  const data = doc.data() as SensorData;
+  data.date = data.time.toDate();
+  return data;
 }
 
 export async function getDataRange(start: Date, end: Date): Promise<SensorData[]> {
@@ -22,7 +30,7 @@ export async function getDataRange(start: Date, end: Date): Promise<SensorData[]
     .where('time', '>', start)
     .where('time', '<', end);
   const snapshot = await query.get();
-  return snapshot.docs.map(doc => doc.data() as SensorData);
+  return snapshot.docs.map(prepareSensorData);
 }
 
 export function getDataStream(start: Date = new Date()): Observable<SensorData> {
@@ -35,7 +43,7 @@ export function getDataStream(start: Date = new Date()): Observable<SensorData> 
       next(snap) {
         for (const change of snap.docChanges()) {
           if (change.type === 'added')
-            sub.next(change.doc.data() as SensorData);
+            sub.next(prepareSensorData(change.doc));
         }
       },
     });

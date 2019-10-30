@@ -23,12 +23,22 @@
 }
 
 .App-main {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+  text-align: center;
 }
 
-.App .leaflet-container {
+.App-row {
+  display: inline-flex;
+  flex-direction: row;
+}
+
+.App .leaflet-container,
+.App .chart-container {
   height: 40vw;
   width: 40vw;
+  flex-shrink: 0;
+}
+
+.App .chart-container {
+  background: white;
+  margin-left: 32px;
 }
