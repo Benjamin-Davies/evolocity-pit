@@ -5,6 +5,7 @@ import { VictoryLine, VictoryChart, VictoryTheme } from 'victory';
 
 import { SensorData } from './telemetry';
 import DataSelector from './DataSelector';
+import Loading from './Loading'
 
 import 'leaflet/dist/leaflet.css';
 import './App.css';
@@ -62,15 +63,7 @@ function App() {
             </div>
           </div>
         ) : (
-          <div>
-            <div className="App-spinner" />
-            <h3>
-              Loading data
-              <span className="App-dot-1">.</span>
-              <span className="App-dot-2">.</span>
-              <span className="App-dot-3">.</span>
-            </h3>
-          </div>
+          <Loading what="data" />
         )}
       </main>
     </div>

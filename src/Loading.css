@@ -1,0 +1,54 @@
+.Loading-spinner {
+  width: 30px;
+  height: 30px;
+  margin: 2em auto -1em;
+  border: 5px solid lightblue;
+  border-radius: 50%;
+  border-bottom: 5px solid transparent;
+  animation: 1s spin infinite linear;
+}
+
+@keyframes spin {
+  from {
+    transform: none;
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.Loading-dot-1,
+.Loading-dot-2,
+.Loading-dot-3 {
+  display: inline-block;
+  animation: 1s bounce infinite linear;
+}
+
+.Loading-dot-2 {
+  animation-delay: 0.2s;
+}
+
+.Loading-dot-3 {
+  animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+  0% {
+    transform: none;
+  }
+  15% {
+    transform: translateY(-.4em);
+  }
+  20% {
+    transform: translateY(-.5em);
+  }
+  25% {
+    transform: translateY(-.4em);
+  }
+  40% {
+    transform: none;
+  }
+  100% {
+    transform: none;
+  }
+}
