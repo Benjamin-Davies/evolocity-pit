@@ -1,0 +1,11 @@
+.DataSelector {
+  background: #222;
+  width: fit-content;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.7rem;
+  margin: 0 auto;
+}
+
+.DataSelector label {
+  margin-left: 0.7rem;
+}

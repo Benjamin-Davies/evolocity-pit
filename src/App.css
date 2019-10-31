@@ -4,11 +4,13 @@
 
 .App-status {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
+  top: 0.5rem;
+  left: 0.5rem;
+  right: 0.5rem;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
 
-  background: #000;
+  background: #222;
   font-size: 24pt;
 }
 
@@ -59,5 +61,41 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+.App-dot-1,
+.App-dot-2,
+.App-dot-3 {
+  display: inline-block;
+  animation: 1s bounce infinite linear;
+}
+
+.App-dot-2 {
+  animation-delay: 0.2s;
+}
+
+.App-dot-3 {
+  animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+  0% {
+    transform: none;
+  }
+  15% {
+    transform: translateY(-.4em);
+  }
+  20% {
+    transform: translateY(-.5em);
+  }
+  25% {
+    transform: translateY(-.4em);
+  }
+  40% {
+    transform: none;
+  }
+  100% {
+    transform: none;
   }
 }

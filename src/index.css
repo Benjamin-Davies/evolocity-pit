@@ -4,17 +4,19 @@
 }
 
 body {
-  background: #333;
-  color: #eee;
+  background: linear-gradient(#000, #002);
+  color: #ddd;
   margin: 0;
   font-family: "Input Sans", sans-serif;
   font-size: 18pt;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
 }
 
 h1, h2, h3 {
-  color: #fff;
+  color: #eee;
+  font-weight: 400;
 }
 
 .left {
