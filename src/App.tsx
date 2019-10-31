@@ -61,26 +61,33 @@ function App() {
         <input type="datetime-local"
           value={endTime.toISOString().slice(0, -1)}
           onChange={ev => setEndTime(new Date(ev.target.value))} />
-        { lastData ? (<div className="App-row">
-          <Map center={center} zoom={zoom}>
-            <TileLayer
-              attribution="&amp;copy <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-          </Map>
-          <div className="chart-container">
-            <VictoryChart
-              theme={VictoryTheme.material}
-              width={window.innerWidth*.4}
-              height={window.innerWidth*.4}
-            >
-              <VictoryLine
-                data={data}
-                x="date"
-                y="current"
-                />
-            </VictoryChart>
+        { lastData ? (
+          <div className="App-row">
+            <Map center={center} zoom={zoom}>
+              <TileLayer
+                attribution="&amp;copy <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+            </Map>
+            <div className="chart-container">
+              <VictoryChart
+                theme={VictoryTheme.material}
+                width={window.innerWidth*.4}
+                height={window.innerWidth*.4}
+              >
+                <VictoryLine
+                  data={data}
+                  x="date"
+                  y="current"
+                  />
+              </VictoryChart>
+            </div>
           </div>
-        </div>) : null }
+        ) : (
+          <div>
+            <div className="App-spinner" />
+            <h3>Loading data...</h3>
+          </div>
+        ) }
       </main>
     </div>
   );

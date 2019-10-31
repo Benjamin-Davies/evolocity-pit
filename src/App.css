@@ -42,3 +42,22 @@
   background: white;
   margin-left: 32px;
 }
+
+.App-spinner {
+  width: 30px;
+  height: 30px;
+  margin: 2em auto -1em;
+  border: 5px solid lightblue;
+  border-radius: 50%;
+  border-bottom: 5px solid transparent;
+  animation: 1s spin infinite linear;
+}
+
+@keyframes spin {
+  from {
+    transform: none;
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
