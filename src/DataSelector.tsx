@@ -1,4 +1,11 @@
-import React, {useState, useEffect, ChangeEvent, useCallback, Dispatch, SetStateAction} from 'react';
+import React, {
+  useState,
+  useEffect,
+  ChangeEvent,
+  useCallback,
+  Dispatch,
+  SetStateAction
+} from 'react';
 
 import { SensorData, getDataRange, getDataStream } from './telemetry';
 
@@ -11,7 +18,7 @@ export interface DataSelectorProps {
 type DataSource = 'Live' | 'Range';
 
 function DataSelector({ setData }: DataSelectorProps) {
-  const [dataSource, setDataSource] = useState<DataSource>("Live");
+  const [dataSource, setDataSource] = useState<DataSource>('Live');
   const [startTime, setStartTime] = useState(new Date(2019, 8, 22));
   const [endTime, setEndTime] = useState(new Date());
 
@@ -22,12 +29,12 @@ function DataSelector({ setData }: DataSelectorProps) {
   useEffect(() => {
     setData([]);
     switch (dataSource) {
-      case "Live":
+      case 'Live':
         const sub = getDataStream().subscribe(newData => {
           setData(d => [...d, newData]);
         });
         return () => sub.unsubscribe();
-      case "Range":
+      case 'Range':
         getDataRange(startTime, endTime).then(setData);
         return;
     }
@@ -41,7 +48,7 @@ function DataSelector({ setData }: DataSelectorProps) {
           <input
             type="radio"
             value="Live"
-            checked={dataSource === "Live"}
+            checked={dataSource === 'Live'}
             onChange={handleOptionChange}
           />
           Live
@@ -50,13 +57,13 @@ function DataSelector({ setData }: DataSelectorProps) {
           <input
             type="radio"
             value="Range"
-            checked={dataSource === "Range"}
+            checked={dataSource === 'Range'}
             onChange={handleOptionChange}
           />
           Range
         </label>
       </div>
-      {dataSource === "Range" ? (
+      {dataSource === 'Range' ? (
         <div>
           <input
             type="datetime-local"
