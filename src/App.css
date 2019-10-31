@@ -31,12 +31,14 @@
 .App-row {
   display: inline-flex;
   flex-direction: row;
+  margin-top: 2rem;
 }
 
 .App .leaflet-container,
 .App .chart-container {
   height: 40vw;
   width: 40vw;
+  border-radius: 0.5rem;
   flex-shrink: 0;
 }
 
