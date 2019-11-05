@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 
 import { Map, Marker, TileLayer } from 'react-leaflet';
 import { VictoryLine, VictoryChart, VictoryTheme } from 'victory';
@@ -15,6 +15,14 @@ function App() {
   const [data, setData] = useState<SensorData[]>([]);
   const lastData = data[data.length - 1];
 
+  const [satelite, setSatelite] = useState(false);
+  const sateliteChange = useCallback(
+    (ev: React.ChangeEvent<HTMLInputElement>) => {
+      setSatelite(ev.target.checked);
+    },
+    [setSatelite]
+  );
+
   const {
     battery_voltage,
     current,
@@ -23,7 +31,7 @@ function App() {
 
   const [center, zoom]: [[number, number], number] =
     location
-      ? [[location.latitude, location.longitude], 18]
+      ? [[location.latitude, location.longitude], 19]
       // Fallback to zoomed-out view of tauranga
       : [[-37.69, 176.17], 15];
 
@@ -31,10 +39,17 @@ function App() {
     <div className="App">
       <div className="App-map">
         <Map center={center} zoom={zoom}>
-          <TileLayer
-            attribution="&amp;copy <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
+          {satelite ? (
+            <TileLayer
+              attribution="&amp;copy <a href='https://esri.com/'>Esri</a> World Imagery"
+              url="http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+              />
+          ) : (
+            <TileLayer
+              attribution="&amp;copy <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+          )}
           {location ? <Marker position={center} /> : null}
         </Map>
       </div>
@@ -50,6 +65,16 @@ function App() {
         )}
       </div>
       <div className="App-controls">
+        <div className="map-selector">
+          <label>
+            <input
+              type="checkbox"
+              checked={satelite}
+              onChange={sateliteChange}
+            />
+            Satelite Images
+          </label>
+        </div>
         <DataSelector setData={setData} />
         <div className="chart-container">
           {lastData ? (
