@@ -1,11 +1,15 @@
 .DataSelector {
   background: #222;
-  width: fit-content;
   padding: 0.5rem 1.5rem;
   border-radius: 0.7rem;
-  margin: 0 auto;
+}
+
+.DataSelector p {
+  margin: 0 0 0.5rem;
+  text-decoration: underline;
+  text-decoration-color: #AAA;
 }
 
 .DataSelector label {
-  margin-left: 0.7rem;
+  margin: 0.7rem;
 }

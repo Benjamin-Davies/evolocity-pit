@@ -28,6 +28,14 @@ function App() {
 
   return (
     <div className="App">
+      <div className="App-map">
+        <Map center={center} zoom={zoom}>
+          <TileLayer
+            attribution="&amp;copy <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+        </Map>
+      </div>
       <div className="App-status">
         <span className="left orange">&tau;-morrow</span>
         {lastData ? (
@@ -39,33 +47,22 @@ function App() {
           <span className="right">{2 * Math.PI}</span>
         )}
       </div>
-      <header className="App-header">
-        <h1>Welcome to &tau;-morrow pit</h1>
-      </header>
-      <main className="App-main">
+      <div className="App-controls">
         <DataSelector setData={setData} />
-        {lastData ? (
-          <div className="App-row">
-            <Map center={center} zoom={zoom}>
-              <TileLayer
-                attribution="&amp;copy <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              />
-            </Map>
-            <div className="chart-container">
-              <VictoryChart
-                theme={VictoryTheme.material}
-                width={window.innerWidth * 0.4}
-                height={window.innerWidth * 0.4}
-              >
-                <VictoryLine data={data} x="date" y="current" />
-              </VictoryChart>
-            </div>
-          </div>
-        ) : (
-          <Loading what="data" />
-        )}
-      </main>
+        <div className="chart-container">
+          {lastData ? (
+            <VictoryChart
+              theme={VictoryTheme.material}
+              width={window.innerWidth * 0.4}
+              height={window.innerWidth * 0.4}
+            >
+              <VictoryLine data={data} x="date" y="current" />
+            </VictoryChart>
+          ) : (
+            <Loading what="data" />
+          )}
+        </div>
+      </div>
     </div>
   );
 }

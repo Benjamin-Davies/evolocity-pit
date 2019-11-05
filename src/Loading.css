@@ -2,7 +2,7 @@
   width: 30px;
   height: 30px;
   margin: 2em auto -1em;
-  border: 5px solid lightblue;
+  border: 5px solid skyblue;
   border-radius: 50%;
   border-bottom: 5px solid transparent;
   animation: 1s spin infinite linear;
@@ -15,6 +15,10 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.Loading h3 {
+  color: #555;
 }
 
 .Loading-dot-1,

@@ -43,7 +43,7 @@ function DataSelector({ setData }: DataSelectorProps) {
   return (
     <div className="DataSelector">
       <div>
-        Data Source:
+        <p>Data Source</p>
         <label>
           <input
             type="radio"

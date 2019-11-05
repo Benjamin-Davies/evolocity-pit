@@ -8,7 +8,7 @@ export interface LoadingProps {
 
 function Loading({ what }: LoadingProps) {
   return (
-    <div>
+    <div className="Loading">
       <div className="Loading-spinner" />
       <h3>
         Loading
