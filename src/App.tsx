@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Map, TileLayer } from 'react-leaflet';
+import { Map, Marker, TileLayer } from 'react-leaflet';
 import { VictoryLine, VictoryChart, VictoryTheme } from 'victory';
 
 import { SensorData } from './telemetry';
@@ -8,6 +8,7 @@ import DataSelector from './DataSelector';
 import Loading from './Loading'
 
 import 'leaflet/dist/leaflet.css';
+import './leaflet-webpack-patch';
 import './App.css';
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
             attribution="&amp;copy <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
+          {location ? <Marker position={center} /> : null}
         </Map>
       </div>
       <div className="App-status">
