@@ -4,7 +4,7 @@
 
 .App-status,
 .App .map-selector {
-  border-radius: 0.5rem;
+  border-radius: 0.7rem;
   padding: 0.5rem;
   background: #222;
 }
@@ -51,6 +51,6 @@
 
 .App .chart-container {
   height: 400px;
-  border-radius: 0.5rem;
+  border-radius: 0.7rem;
   background: #FFFFFFDD;
 }
