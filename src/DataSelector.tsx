@@ -19,7 +19,7 @@ type DataSource = 'Live' | 'Range';
 
 function DataSelector({ setData }: DataSelectorProps) {
   const [dataSource, setDataSource] = useState<DataSource>('Live');
-  const [startTime, setStartTime] = useState(new Date(2019, 8, 22));
+  const [startTime, setStartTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
 
   const handleOptionChange = useCallback((ev: ChangeEvent) => {
@@ -28,17 +28,16 @@ function DataSelector({ setData }: DataSelectorProps) {
 
   useEffect(() => {
     setData([]);
-    switch (dataSource) {
-      case 'Live':
-        const sub = getDataStream().subscribe(newData => {
-          setData(d => [...d, newData]);
-        });
-        return () => sub.unsubscribe();
-      case 'Range':
-        getDataRange(startTime, endTime).then(setData);
-        return;
+    if (dataSource === 'Live') {
+      const sub = getDataStream().subscribe(newData => {
+        setData(d => [...d, newData]);
+      });
+      return () => sub.unsubscribe();
     }
   }, [dataSource, startTime, endTime, setData]);
+  const fetchRange = useCallback(() => {
+    getDataRange(startTime, endTime).then(setData);
+  }, [startTime, endTime, setData]);
 
   return (
     <div className="DataSelector">
@@ -75,6 +74,7 @@ function DataSelector({ setData }: DataSelectorProps) {
             value={endTime.toISOString().slice(0, -1)}
             onChange={ev => setEndTime(new Date(ev.target.value))}
           />
+          <button onClick={fetchRange}>Fetch Range</button>
         </div>
       ) : null}
     </div>
