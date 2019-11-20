@@ -25,6 +25,7 @@ function App() {
 
   const {
     battery_voltage,
+    speed,
     current,
     location,
   } = lastData || {};
@@ -57,8 +58,9 @@ function App() {
         <span className="left orange">&tau;-morrow</span>
         {lastData ? (
           <>
-            <span className="right">{battery_voltage.toFixed(2)}V</span>
-            <span className="right">{current.toFixed(2)}A</span>
+            <span className="right">{battery_voltage.toFixed(2)} V</span>
+            <span className="right">{speed.toFixed(2)} km/h</span>
+            <span className="right">{current.toFixed(2)} A</span>
           </>
         ) : (
           <span className="right">{2 * Math.PI}</span>
