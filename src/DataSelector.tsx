@@ -19,9 +19,12 @@ type DataSource = 'Live' | 'Range';
 
 function DataSelector({ setData }: DataSelectorProps) {
   const [dataSource, setDataSource] = useState<DataSource>('Live');
-  const now = new Date().toISOString().slice(0, -1);
-  const [startTime, setStartTime] = useState<string | Date>(now);
-  const [endTime, setEndTime] = useState<string | Date>(now);
+
+  const now = new Date();
+  now.setUTCHours(now.getHours()); // So that it is in local time
+  const nowStr = now.toISOString().slice(0, -1);
+  const [startTime, setStartTime] = useState<string>(nowStr);
+  const [endTime, setEndTime] = useState<string>(nowStr);
 
   const handleOptionChange = useCallback((ev: ChangeEvent) => {
     setDataSource((ev.target as HTMLInputElement).value as DataSource);
