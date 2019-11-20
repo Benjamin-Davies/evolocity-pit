@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 
 import { Map, Marker, TileLayer } from 'react-leaflet';
-import { VictoryLine, VictoryChart, VictoryTheme } from 'victory';
+import { VictoryLine, VictoryChart, VictoryTheme, VictoryLegend } from 'victory';
 
 import { SensorData } from './telemetry';
 import DataSelector from './DataSelector';
@@ -35,6 +35,13 @@ function App() {
       ? [[location.latitude, location.longitude], 19]
       // Fallback to zoomed-out view of tauranga
       : [[-37.69, 176.17], 15];
+
+  const chartData = ['battery_voltage', 'speed', 'current']
+    .map(key => data.map(d => ({
+      x: d.date,
+      y: (d as any)[key] || 0,
+    })));
+  const colors = ['green', 'red', 'blue'];
 
   return (
     <div className="App">
@@ -85,7 +92,25 @@ function App() {
               width={window.innerWidth * 0.4}
               height={window.innerWidth * 0.4}
             >
-              <VictoryLine data={data} x="date" y="current" />
+              {
+                chartData.map((d, i) => (
+                  <VictoryLine
+                    key={i}
+                    data={d}
+                    style={{
+                      data: { stroke: colors[i]},
+                    }}
+                    />
+                ))
+              }
+              <VictoryLegend x={125} y={10}
+                orientation="horizontal"
+                gutter={20}
+                colorScale={colors}
+                data={[
+                  { name: "Battery Voltage" }, { name: "Speed" }, { name: "Current" }
+                ]}
+                />
             </VictoryChart>
           ) : (
             <Loading what="data" />
