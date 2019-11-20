@@ -19,8 +19,9 @@ type DataSource = 'Live' | 'Range';
 
 function DataSelector({ setData }: DataSelectorProps) {
   const [dataSource, setDataSource] = useState<DataSource>('Live');
-  const [startTime, setStartTime] = useState(new Date());
-  const [endTime, setEndTime] = useState(new Date());
+  const now = new Date().toISOString().slice(0, -1);
+  const [startTime, setStartTime] = useState<string | Date>(now);
+  const [endTime, setEndTime] = useState<string | Date>(now);
 
   const handleOptionChange = useCallback((ev: ChangeEvent) => {
     setDataSource((ev.target as HTMLInputElement).value as DataSource);
@@ -36,7 +37,9 @@ function DataSelector({ setData }: DataSelectorProps) {
     }
   }, [dataSource, startTime, endTime, setData]);
   const fetchRange = useCallback(() => {
-    getDataRange(startTime, endTime).then(setData);
+    const start = new Date(startTime);
+    const end = new Date(endTime);
+    getDataRange(start, end).then(setData);
   }, [startTime, endTime, setData]);
 
   return (
@@ -66,14 +69,16 @@ function DataSelector({ setData }: DataSelectorProps) {
         <div>
           <input
             type="datetime-local"
-            value={startTime.toISOString().slice(0, -1)}
-            onChange={ev => setStartTime(new Date(ev.target.value))}
+            value={startTime.toString()}
+            onChange={ev => setStartTime(ev.target.value)}
           />
+          <br />
           <input
             type="datetime-local"
-            value={endTime.toISOString().slice(0, -1)}
-            onChange={ev => setEndTime(new Date(ev.target.value))}
+            value={endTime.toString()}
+            onChange={ev => setEndTime(ev.target.value)}
           />
+          <br />
           <button onClick={fetchRange}>Fetch Range</button>
         </div>
       ) : null}
