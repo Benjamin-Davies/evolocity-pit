@@ -24,7 +24,6 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "test:ci": "CI=true react-scripts test --ci",
     "dev-server": "nodemon --watch server/**/*.js server",
     "dev": "BROWSER=none concurrently npm:dev-server npm:start"
   },
