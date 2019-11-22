@@ -59,7 +59,14 @@ function App() {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
           )}
-          {location ? <Marker position={center} /> : null}
+          {
+            data.slice(-100, -1).map((d, i) => d.location && (
+              <Marker
+                key={i}
+                position={[d.location.latitude, d.location.longitude]}
+                />
+            ))
+          }
         </Map>
       </div>
       <div className="App-status">
