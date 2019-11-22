@@ -25,8 +25,9 @@ function App() {
 
   const {
     battery_voltage,
-    speed,
     current,
+    speed,
+    economy,
     location,
   } = lastData || {};
 
@@ -36,12 +37,12 @@ function App() {
       // Fallback to zoomed-out view of tauranga
       : [[-37.69, 176.17], 15];
 
-  const chartData = ['battery_voltage', 'speed', 'current']
+  const chartData = ['battery_voltage', 'speed', 'current', 'economy']
     .map(key => data.map(d => ({
       x: d.date,
       y: (d as any)[key] || 0,
     })));
-  const colors = ['green', 'red', 'blue'];
+  const colors = ['green', 'red', 'blue', 'yellow'];
 
   return (
     <div className="App">
@@ -66,8 +67,9 @@ function App() {
         {lastData ? (
           <>
             <span className="right">{battery_voltage.toFixed(2)} V</span>
-            <span className="right">{speed.toFixed(2)} km/h</span>
             <span className="right">{current.toFixed(2)} A</span>
+            <span className="right">{speed.toFixed(2)} km/h</span>
+            <span className="right">{economy.toFixed(2)} Wh/km</span>
           </>
         ) : (
           <span className="right">{2 * Math.PI}</span>
@@ -103,12 +105,12 @@ function App() {
                     />
                 ))
               }
-              <VictoryLegend x={125} y={10}
+              <VictoryLegend x={10} y={10}
                 orientation="horizontal"
                 gutter={20}
                 colorScale={colors}
                 data={[
-                  { name: "Battery Voltage" }, { name: "Speed" }, { name: "Current" }
+                  { name: 'Battery Voltage' }, { name: 'Speed' }, { name: 'Current' }, { name: 'Economy' }
                 ]}
                 />
             </VictoryChart>

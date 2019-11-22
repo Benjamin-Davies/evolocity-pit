@@ -15,6 +15,7 @@ export interface SensorData {
   date: Date;
   location: firebase.firestore.GeoPoint | null;
   speed: number;
+  economy: number;
   time: firebase.firestore.Timestamp;
   voltage: number;
 }
