@@ -22,6 +22,13 @@ function App() {
     },
     [setSatelite]
   );
+  const [markerTrail, setMarkerTrail] = useState(false);
+  const markerTrailChange = useCallback(
+    (ev: React.ChangeEvent<HTMLInputElement>) => {
+      setMarkerTrail(ev.target.checked);
+    },
+    [setMarkerTrail]
+  );
 
   const fullscreen = useCallback((ev: React.MouseEvent<HTMLButtonElement>) => {
     const btn = ev.target as HTMLButtonElement;
@@ -66,12 +73,14 @@ function App() {
               />
           )}
           {
-            data.slice(-100, -1).map((d, i) => d.location && (
+            markerTrail ? data.slice(-100, -1).map((d, i) => d.location && (
               <Marker
                 key={i}
                 position={[d.location.latitude, d.location.longitude]}
-                />
-            ))
+              />
+            )) : (
+              location ? <Marker position={center} /> : null
+            )
           }
         </Map>
       </div>
@@ -97,6 +106,15 @@ function App() {
               onChange={sateliteChange}
             />
             Satelite Images
+          </label>
+          <br />
+          <label>
+            <input
+              type="checkbox"
+              checked={markerTrail}
+              onChange={markerTrailChange}
+            />
+            Marker Trail
           </label>
         </div>
         <DataSelector setData={setData} />
