@@ -59,6 +59,16 @@
   height: 100%;
 }
 
+.App .chart-container svg {
+  max-height: 100vh;
+}
+
+.App .chart-container > button {
+  position: absolute;
+  right: 0;
+  top: -20px;
+}
+
 @media (max-width: 720px) {
   .chart-container,
   .DataSelector {
