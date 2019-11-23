@@ -6,6 +6,7 @@ import { VictoryLine, VictoryChart, VictoryTheme, VictoryLegend } from 'victory'
 import { SensorData } from './telemetry';
 import DataSelector from './DataSelector';
 import Loading from './Loading'
+import { blueCircle } from './Icons';
 
 import 'leaflet/dist/leaflet.css';
 import './leaflet-webpack-patch';
@@ -73,14 +74,16 @@ function App() {
               />
           )}
           {
-            markerTrail ? data.slice(-100, -1).map((d, i) => d.location && (
+            markerTrail ? data.slice(-100, -2).map((d, i) => d.location && (
               <Marker
                 key={i}
+                icon={blueCircle}
                 position={[d.location.latitude, d.location.longitude]}
               />
-            )) : (
-              location ? <Marker position={center} /> : null
-            )
+            )) : null
+          }
+          {
+            location ? <Marker position={center} /> : null
           }
         </Map>
       </div>
