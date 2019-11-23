@@ -23,6 +23,12 @@ function App() {
     [setSatelite]
   );
 
+  const fullscreen = useCallback((ev: React.MouseEvent<HTMLButtonElement>) => {
+    const btn = ev.target as HTMLButtonElement;
+    const container = btn.parentElement as HTMLInputElement;
+    container.requestFullscreen();
+  }, []);
+
   const {
     battery_voltage,
     current,
@@ -95,35 +101,38 @@ function App() {
         </div>
         <DataSelector setData={setData} />
         <div className="chart-container">
-          {lastData ? (
-            <VictoryChart
-              theme={VictoryTheme.material}
-              width={window.innerWidth * 0.4}
-              height={window.innerWidth * 0.4}
-            >
-              {
-                chartData.map((d, i) => (
-                  <VictoryLine
-                    key={i}
-                    data={d}
-                    style={{
-                      data: { stroke: colors[i]},
-                    }}
-                    />
-                ))
-              }
-              <VictoryLegend x={10} y={10}
-                orientation="horizontal"
-                gutter={20}
-                colorScale={colors}
-                data={[
-                  { name: 'Battery Voltage' }, { name: 'Speed' }, { name: 'Current' }, { name: 'Economy' }
-                ]}
-                />
-            </VictoryChart>
-          ) : (
-            <Loading what="data" />
-          )}
+          <div>
+            {lastData ? (
+              <VictoryChart
+                theme={VictoryTheme.material}
+                width={window.innerWidth * 0.4}
+                height={window.innerWidth * 0.4}
+              >
+                {
+                  chartData.map((d, i) => (
+                    <VictoryLine
+                      key={i}
+                      data={d}
+                      style={{
+                        data: { stroke: colors[i]},
+                      }}
+                      />
+                  ))
+                }
+                <VictoryLegend x={10} y={10}
+                  orientation="horizontal"
+                  gutter={20}
+                  colorScale={colors}
+                  data={[
+                    { name: 'Battery Voltage' }, { name: 'Speed' }, { name: 'Current' }, { name: 'Economy' }
+                  ]}
+                  />
+              </VictoryChart>
+            ) : (
+              <Loading what="data" />
+            )}
+          </div>
+          <button onClick={fullscreen}>fullscreen</button>
         </div>
       </div>
     </div>

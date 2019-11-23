@@ -54,3 +54,19 @@
   border-radius: 0.7rem;
   background: #FFFFFFDD;
 }
+
+.App .chart-container > div {
+  height: 100%;
+}
+
+@media (max-width: 720px) {
+  .chart-container,
+  .DataSelector {
+    display: none;
+  }
+
+  .App-controls {
+    left: 0;
+    width: 100%;
+  }
+}
