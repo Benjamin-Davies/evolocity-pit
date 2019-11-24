@@ -51,12 +51,12 @@ function App() {
       // Fallback to zoomed-out view of tauranga
       : [[-37.69, 176.17], 15];
 
-  const chartData = ['battery_voltage', 'speed', 'current', 'economy']
+  const chartData = ['battery_voltage', 'speed', 'current'/*, 'economy'*/]
     .map(key => data.map(d => ({
       x: d.date,
       y: (d as any)[key] || 0,
     })));
-  const colors = ['green', 'red', 'blue', 'yellow'];
+  const colors = ['green', 'red', 'blue'/*, 'yellow'*/];
 
   return (
     <div className="App">
@@ -145,7 +145,7 @@ function App() {
                   gutter={20}
                   colorScale={colors}
                   data={[
-                    { name: 'Battery Voltage' }, { name: 'Speed' }, { name: 'Current' }, { name: 'Economy' }
+                    { name: 'Battery Voltage' }, { name: 'Speed' }, { name: 'Current' }//, { name: 'Economy' }
                   ]}
                   />
               </VictoryChart>
